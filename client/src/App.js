@@ -1,16 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
 import Customers from './components/customers/customers.js'
 import Form from './components/form/form.js'
+import Header from './components/header/header.js'
+import {useState} from 'react';
+
+
 
 function App() {
+  const [customerState, setCustomerState] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <Customers />
-      <Form />
+      <Header />
+      <Customers customerState = {customerState} />
+      <Form customerState = {setCustomerState} />
     </div>
   );
 }

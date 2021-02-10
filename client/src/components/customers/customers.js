@@ -1,25 +1,33 @@
 import './customers.css';
-import {useEffect, useState} from 'react';
+import {useState, useRef, useEffect} from 'react';
 
-function Customers() {
+function Customers(props) {
     const [customerState, setCustomerState] = useState([]);
+    const [wrapperState, setWrapperState] = useState('hide-customer-wrapper');
+    const wrapper = useRef(null);
+    useEffect(() => {
+      if (props.customerState){
+        fetch('/api/customers').then(res => {
+          if(res.ok){
+            return res.json()
+          }
+        }).then(jsonResponse => setCustomerState(jsonResponse))
+        setWrapperState('show-customer-wrapper')
+      } else {
+        setWrapperState('hide-customer-wrapper')
+      }
+    }, [props.customerState])
 
-    useEffect(()=>{
-      fetch('/api/customers').then(res => {
-        if(res.ok){
-          return res.json()
-        }
-      }).then(jsonResponse => setCustomerState(jsonResponse))
-    },[])
     
   return (
-    <div>
-        <h2>Customers</h2>
+    <div ref={wrapper} className={wrapperState}>
+        <p>Subscribers</p>
         <ul>
             {customerState.map(c => 
                 <li key={c.id}>{c.firstName} {c.lastName}</li>
             )}
         </ul>
+        <button>Return</button>
     </div>
   );
 }
