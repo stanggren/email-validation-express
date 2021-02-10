@@ -1,6 +1,6 @@
 import './form.css';
 import axios from 'axios';
-import {useRef, useState} from 'react';
+import {useRef, useState, useEffect} from 'react';
 
 
 function Form(props) {
@@ -14,6 +14,12 @@ function Form(props) {
     const [LNState, setLNState] = useState('valid');
     const [emailState, setEmailState] = useState('valid');
     const [formState, setFormState] = useState('show-form')
+
+    useEffect(() => {
+        if (props.formState){
+            setFormState('show-form');
+        }
+      }, [props.formState])
 
     function handleSubmit(e){
 
@@ -71,7 +77,11 @@ function Form(props) {
     }
 
     function renderCustomerList(){
-        props.customerState(true);
+        props.setCustomerState(true);
+        props.setFormState(false);
+
+        // props.setFormState(true);
+        // props.setCustomerState(false);
     }
 
     function resetInvalidFields(){

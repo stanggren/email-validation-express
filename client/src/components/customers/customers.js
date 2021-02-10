@@ -6,6 +6,7 @@ function Customers(props) {
     const [wrapperState, setWrapperState] = useState('hide-customer-wrapper');
     const wrapper = useRef(null);
     useEffect(() => {
+      console.log(props.customerState);
       if (props.customerState){
         fetch('/api/customers').then(res => {
           if(res.ok){
@@ -18,16 +19,22 @@ function Customers(props) {
       }
     }, [props.customerState])
 
+    function returnToForm(){
+      setWrapperState('hide-customer-wrapper');
+      props.setFormState(true);
+      props.setCustomerState(false);
+    }
+
     
   return (
     <div ref={wrapper} className={wrapperState}>
-        <p>Subscribers</p>
+        <h3>Subscribers</h3>
         <ul>
             {customerState.map(c => 
                 <li key={c.id}>{c.firstName} {c.lastName}</li>
             )}
         </ul>
-        <button>Return</button>
+        <button onClick={returnToForm}>Return</button>
     </div>
   );
 }

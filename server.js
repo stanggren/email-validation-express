@@ -19,26 +19,12 @@ app.get('/api/customers', (req, res) => {
     res.json(customers);
 });
 
-
-
 app.post('/api/submit', jsonParser, (req, res, next) => {
     let validationObj = helper.generateValidationList(req.body);
     if (helper.checkBooleans(validationObj)) helper.addCustomer(req.body, customers);
     res.json(validationObj);
 });
 
-// app.get('api/error', jsonParser, (req, res, next) => {
-//     console.log("api/error");
-// })
-
-// app.get('api/success', jsonParser, (req, res, next) => {
-//     console.log("api/success");
-// })
-
 const port = 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
-
-
-// if anyone is false, send back object with false, true, true to check in frontend wich field is false
-// if all is true, add object to customers list and send back whole list

@@ -8,12 +8,13 @@ import {useState} from 'react';
 
 function App() {
   const [customerState, setCustomerState] = useState(false);
+  const [formState, setFormState] = useState(false);
 
   return (
     <div className="App">
       <Header />
-      <Customers customerState = {customerState} />
-      <Form customerState = {setCustomerState} />
+      <Customers setFormState={setFormState} setCustomerState={setCustomerState} customerState = {customerState} />
+      <Form setFormState={setFormState} formState={formState} setCustomerState = {setCustomerState} />
     </div>
   );
 }
