@@ -5,8 +5,8 @@ function Customers(props) {
     const [customerState, setCustomerState] = useState([]);
     const [wrapperState, setWrapperState] = useState('hide-customer-wrapper');
     const wrapper = useRef(null);
+    
     useEffect(() => {
-      console.log(props.customerState);
       if (props.customerState){
         fetch('/api/customers').then(res => {
           if(res.ok){

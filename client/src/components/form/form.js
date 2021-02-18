@@ -79,9 +79,6 @@ function Form(props) {
     function renderCustomerList(){
         props.setCustomerState(true);
         props.setFormState(false);
-
-        // props.setFormState(true);
-        // props.setCustomerState(false);
     }
 
     function resetInvalidFields(){
